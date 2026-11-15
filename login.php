@@ -2,7 +2,7 @@
 session_start();
 require 'koneksi.php';
 
-if(!isset($_SESSION['username'])) {
+if(isset($_SESSION['username'])) {
     header("Location: dashboard.php");
     exit();
 }
@@ -28,12 +28,12 @@ if(isset($_POST['login'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light d-flex align-items-center justify-content-center min-vh-100">
     <div class="card p-4 shadow-sm" style="width: 350px;">

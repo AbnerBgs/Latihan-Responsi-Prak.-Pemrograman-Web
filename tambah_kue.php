@@ -3,19 +3,19 @@
     require 'cek_session.php';
 
     if (isset($_POST['submit'])) {
-        $nama = trim($_POST['nama']);
+        $nama  = trim($_POST['nama']);
         $harga = intval($_POST['harga']);
-        $stok = intval($_POST['stok']);
+        $stok  = intval($_POST['stok']);
 
         $foto_name = $_FILES['foto']['name'];
-        $foto_tmp = $_FILES['foto']['tmp_name'];
-        $ext = pathinfo($foto_name, PATHINFO_EXTENSION);
+        $foto_tmp  = $_FILES['foto']['tmp_name'];
+        $ext       = pathinfo($foto_name, PATHINFO_EXTENSION);
         
-        $nama_foto_baru = time() . '_' . uniqid() . '.' . $ext;
-        $target_dir = 'uploads/' . $nama_foto_baru;
+        $nama_foto_baru = time() .  '_' . uniqid() . '.' . $ext;
+        $target_dir     = 'uploads/' . $nama_foto_baru;
 
         if (move_uploaded_file($foto_tmp, $target_dir)) {
-            $query = "INSERT INTO kue (nama, hargam stok, foto) VALUES " ('$nama', '$harga', '$stok', '$nama_foto_baru');
+            $query = "INSERT INTO kue (nama, harga, stok, foto) VALUES ('$nama', '$harga', '$stok', '$nama_foto_baru')";
             if (mysqli_query($conn, $query)) {
                 header("Location: dashboard.php");
                 exit();
@@ -25,11 +25,12 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tambah Kue</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light p-4">
     <div class="container" style="max-width: 500px;">

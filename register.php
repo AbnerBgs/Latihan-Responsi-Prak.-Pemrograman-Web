@@ -6,22 +6,24 @@
     $success = '';
 
     if (isset($_POST['register'])) {
-        $username = trim($$_POST['username']);
+        $username = trim($_POST['username']);
         $password = $_POST['password'];
 
         if (!empty($username) && !empty($password)) {
-            // cek apakah username sudah dipakai
+            // Cek apakah username sudah dipakai
             $cek = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
             if (mysqli_num_rows($cek) > 0) {
                 $error = "Username sudah digunakan, silahkan pakai yang lain!";
             } else {
-                // hash pw
+                // Hash password
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-                $query = "INSERT INTO users (username, password VALUES ('$username, $hashed_password')";
+                
+                $query = "INSERT INTO users (username, password) VALUES ('$username', '$hashed_password')";
+                
                 if (mysqli_query($conn, $query)) {
                     header("Location: login.php");
                     exit();
-                }  else {
+                } else {
                     $error = "Gagal register!";
                 }
             }
@@ -32,12 +34,12 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light d-flex align-items-center justify-content-center min-vh-100">
     <div class="card p-4 shadow-sm" style="width: 350px;">
